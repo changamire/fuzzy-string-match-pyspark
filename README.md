@@ -2,5 +2,6 @@
 
 To run the example
 
- git clone
- 
+```
+git clone https://github.com/changamire/fuzzy-string-match-pyspark.git
+```

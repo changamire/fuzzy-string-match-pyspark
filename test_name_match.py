@@ -1,10 +1,9 @@
 from pyspark.sql import SparkSession, Row
 from pyspark.ml import Pipeline, Model, PipelineModel
 from pyspark.ml.feature import RegexTokenizer, NGram, HashingTF, MinHashLSH
-from pyspark.ml.tuning import CrossValidator
 
 from pyspark.sql.types import *
-from pyspark.sql.functions import isnan, when, count, col, lit, udf, concat, year, col
+from pyspark.sql.functions import  col
 
 
 def test_matching_ml_pipeline(spark_context):
@@ -24,15 +23,9 @@ def match_names(df_1, df_2):
     ])
 
     model = pipeline.fit(df_1)
-  
-    #model = PipelineModel.load("model")
-    #print(model)
-    #model.save('model')
 
     stored_hashed = model.transform(df_1)
-    stored_hashed.select('name', 'vectors', 'lsh').show(20, False)
     landed_hashed = model.transform(df_2)
-    landed_hashed.select('name',  'vectors', 'lsh').show(20, False)
 
     matched_df = model.stages[-1].approxSimilarityJoin(stored_hashed, landed_hashed, 1.0, "confidence").select(
         col("datasetA.name"), col("datasetB.name"), col("confidence"))
