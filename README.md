@@ -18,4 +18,4 @@ Run the following command to setup the virtual environment and run the test
 
 After the setup has been run once, the test can subsequently be run without the <b>setup</b> flag.
 
-More details available <a href="http://gregbiegel.info/blog/using-machine-learning-in-python-to-fuzzily-match-strings">here</a>
+More details available <a href="http://gregbiegel.net/blog/using-machine-learning-in-python-to-fuzzily-match-strings">here</a>
